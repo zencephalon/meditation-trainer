@@ -3,6 +3,6 @@ get '/' do
 end
 
 get '/meditate' do
-  @breathes = params[:breathes]
+  @breaths = params[:breaths]
   erb :meditate
 end
