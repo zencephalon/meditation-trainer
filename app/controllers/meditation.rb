@@ -18,3 +18,8 @@ get '/meditation/:id' do |id|
   @meditation = Meditation.find(id)
   erb :'meditation'
 end
+
+get '/meditator/:id' do |id|
+  @user = User.find(id)
+  erb :'meditator'
+end
