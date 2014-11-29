@@ -19,9 +19,16 @@ Meditation.prototype.displayStats = function() {
   this.$stat_display.html("Average inhale: " + this.calcAverage("inhale"));
 }
 
+Meditation.prototype.calcAverage = function(phase) {
+  console.log(this.breaths[phase]);
+  var sum = _(this.breaths[phase]).reduce(function(memo, num){ return memo + num; }, 0);
+  return sum / this.breaths[phase].length;
+}
+
 Meditation.prototype.breathe = function() {
   this.breaths[this.phase].push(this.timeDiff());
   this.setPhase();
+  this.displayStats();
   this.checkFinish();
 }
 
@@ -41,10 +48,10 @@ Meditation.prototype.setPhase = function() {
 Meditation.prototype.initTimer = function() {
   var self = this;
   this.timerInterval = setInterval(function() {
-    self.$timer_display.html(self.timeDiff());
+    self.$timer_display.html(self.timeDiff().toFixed(1));
   }, 100);
 }
 
 Meditation.prototype.timeDiff = function() {
-  return ((Date.now() - this.phase_start) / 1000).toFixed(1)
+  return ((Date.now() - this.phase_start) / 1000)
 }
