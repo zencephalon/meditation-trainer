@@ -57,7 +57,9 @@ Meditation.prototype.breathe = function() {
 
 Meditation.prototype.checkFinish = function() {
   if (this.phase_count >= 2 * this.max_breaths) {
-    console.log("Finished!");
+    this.displayPrompt("Finished");
+    this.clearTimer();
+    this.displayStats();
   }
 }
 
@@ -72,6 +74,10 @@ Meditation.prototype.initTimer = function() {
   this.timerInterval = setInterval(function() {
     self.$timer_display.html(self.timeDiff().toFixed(1));
   }, 100);
+}
+
+Meditation.prototype.clearTimer = function() {
+  clearInterval(this.timerInterval);
 }
 
 Meditation.prototype.timeDiff = function() {
