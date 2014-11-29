@@ -23,19 +23,26 @@ Meditation.prototype.displayStats = function() {
   var self = this;
   var html = "";
   this.phases.forEach(function(phase) {
-    html += phase + " average: " + self.calcStats(phase)['avg'] + "<br>";
+    var stats = self.calcStats(phase);
+    ['min', 'max', 'avg'].forEach(function(stat) {
+      html += phase + " " + stat + ": " + stats[stat].toFixed(1) + "<br>";
+    });
   })
   self.$stat_display.html(html);
 }
 
 Meditation.prototype.calcStats = function(phase) {
-  console.log(this.breaths[phase]);
   var breaths = this.breaths[phase];
-  var sum = _(breaths).reduce(function(s, n){ return s + n; }, 0);
-  var avg = sum / breaths.length;
-  var max = _(breaths).max();
-  var min = _(breaths).min();
-  return {max: max, min: min, avg: avg};
+  console.log(breaths)
+  if (breaths.length > 0) {
+    var sum = _(breaths).reduce(function(s, n){ return s + n; }, 0);
+    var avg = sum / breaths.length;
+    var max = _(breaths).max();
+    var min = _(breaths).min();
+    return {max: max, min: min, avg: avg};
+  } else {
+    return {max: 0, min: 0, avg: 0};
+  }
 }
 
 Meditation.prototype.breathe = function() {
