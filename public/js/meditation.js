@@ -71,12 +71,19 @@ Meditation.prototype.displayStats = function() {
   var self = this;
   var html = "";
   this.phases.forEach(function(phase) {
-    var stats = self.calcStats(phase);
-    ['min', 'max', 'avg'].forEach(function(stat) {
-      html += phase + " " + stat + ": " + self.formatSeconds(stats[stat]) + "<br>";
-    });
+    var stats = self.calcStats(self.breaths[phase]);
+    html += self.formatPhaseStats(phase, stats);
   })
   self.$stat_display.html(html);
+}
+
+Meditation.prototype.formatPhaseStats = function(phase, stats) {
+  var html = "";
+  var self = this;
+  ['min', 'max', 'avg'].forEach(function(stat) {
+      html += phase + " " + stat + ": " + self.formatSeconds(stats[stat]) + "<br>";
+  });
+  return html;
 }
 
 Meditation.prototype.formatSeconds = function(seconds) {
@@ -85,8 +92,7 @@ Meditation.prototype.formatSeconds = function(seconds) {
 
 // ----- Stats -----
 
-Meditation.prototype.calcStats = function(phase) {
-  var breaths = this.breaths[phase];
+Meditation.prototype.calcStats = function(breaths) {
   console.log(breaths)
   if (breaths.length > 0) {
     var sum = _(breaths).reduce(function(s, n){ return s + n; }, 0);
