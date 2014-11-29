@@ -61,7 +61,7 @@ Meditation.prototype.clearTimer = function() {
 
 Meditation.prototype.displayPrompt = function(prompt) {
   if (!prompt) {
-    prompt = this.phase();
+    prompt = this.phase() + " (press Space at end)";
   }
   this.$prompt.html(prompt);
 }
