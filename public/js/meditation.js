@@ -25,15 +25,14 @@ Meditation.prototype.checkFinish = function() {
     this.displayPrompt("Finished");
     this.clearTimer();
     this.displayStats();
-  }
+    $.ajax({
+      type: "POST",
+      url: '/meditation',
+      data: {meditation: this.allStats()}
+    }).done(function(result) {
 
-  $.ajax({
-    type: "POST",
-    action: '/meditate',
-    data: this.allStats()
-  }).done(function(result) {
-    
-  })
+    })
+  }
 }
 
 // ----- Phase -----
