@@ -70,13 +70,12 @@ Meditation.prototype.displayPrompt = function(prompt) {
 Meditation.prototype.displayStats = function() {
   var self = this;
   var html = "";
+  var stats = this.allStats();
 
-  this.phases.forEach(function(phase) {
-    var stats = self.calcStats(self.breaths[phase]);
-    html += self.formatPhaseStats(phase, stats);
-  });
-
-  html += this.formatPhaseStats('cycle', this.calcStats(this.cycles()));
+  for (phase in stats) {
+    html += this.formatPhaseStats(phase, stats[phase]);
+  }
+  
   this.$stat_display.html(html);
 }
 
@@ -96,6 +95,18 @@ Meditation.prototype.formatSeconds = function(seconds) {
 }
 
 // ----- Stats -----
+
+Meditation.prototype.allStats = function() {
+  var self = this;
+  var stats = {};
+
+  this.phases.forEach(function(phase) {
+    stats[phase] = self.calcStats(self.breaths[phase]);
+  });
+  stats["cycle"] = this.calcStats(this.cycles());
+
+  return stats;
+}
 
 Meditation.prototype.calcStats = function(breaths) {
   if (breaths.length > 0) {
