@@ -26,6 +26,14 @@ Meditation.prototype.checkFinish = function() {
     this.clearTimer();
     this.displayStats();
   }
+
+  $.ajax({
+    type: "POST",
+    action: '/meditate',
+    data: this.allStats()
+  }).done(function(result) {
+    
+  })
 }
 
 // ----- Phase -----
@@ -75,7 +83,7 @@ Meditation.prototype.displayStats = function() {
   for (phase in stats) {
     html += this.formatPhaseStats(phase, stats[phase]);
   }
-  
+
   this.$stat_display.html(html);
 }
 
