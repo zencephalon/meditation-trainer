@@ -56,6 +56,10 @@ a:hover {
 
 #timer {
     text-align: center;
+    font-size: 3em;
+}
+
+.time {
     color: #36AECC;
 }
 

@@ -47,10 +47,11 @@ Meditation.prototype.timeDiff = function() {
 }
 
 Meditation.prototype.initTimer = function() {
-  var self = this;
-  this.timerInterval = setInterval(function() {
-    self.$timer_display.html(self.timeDiff().toFixed(1) + " s");
-  }, 100);
+  this.timerInterval = setInterval(this.displayTimer.bind(this), 100);
+}
+
+Meditation.prototype.displayTimer = function() {
+  this.$timer_display.html(this.formatSeconds(this.timeDiff()));
 }
 
 Meditation.prototype.clearTimer = function() {
@@ -76,6 +77,10 @@ Meditation.prototype.displayStats = function() {
     });
   })
   self.$stat_display.html(html);
+}
+
+Meditation.prototype.formatSeconds = function(seconds) {
+  return "<span class='time'>" + seconds.toFixed(1) + "</span> s";
 }
 
 // ----- Stats -----
