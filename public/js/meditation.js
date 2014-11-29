@@ -20,7 +20,12 @@ Meditation.prototype.displayPrompt = function() {
 }
 
 Meditation.prototype.displayStats = function() {
-  this.$stat_display.html("Average inhale: " + this.calcStats("inhale")['avg']);
+  var self = this;
+  var html = "";
+  this.phases.forEach(function(phase) {
+    html += phase + " average: " + self.calcStats(phase)['avg'] + "<br>";
+  })
+  self.$stat_display.html(html);
 }
 
 Meditation.prototype.calcStats = function(phase) {
