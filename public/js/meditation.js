@@ -73,8 +73,9 @@ Meditation.prototype.displayStats = function() {
   this.phases.forEach(function(phase) {
     var stats = self.calcStats(self.breaths[phase]);
     html += self.formatPhaseStats(phase, stats);
-  })
-  self.$stat_display.html(html);
+  });
+  html += this.formatPhaseStats('cycle', this.calcStats(this.cycles()));
+  this.$stat_display.html(html);
 }
 
 Meditation.prototype.formatPhaseStats = function(phase, stats) {
@@ -93,14 +94,27 @@ Meditation.prototype.formatSeconds = function(seconds) {
 // ----- Stats -----
 
 Meditation.prototype.calcStats = function(breaths) {
-  console.log(breaths)
   if (breaths.length > 0) {
-    var sum = _(breaths).reduce(function(s, n){ return s + n; }, 0);
-    var avg = sum / breaths.length;
+    var s = sum(breaths);
+    var avg = s / breaths.length;
     var max = _(breaths).max();
     var min = _(breaths).min();
     return {max: max, min: min, avg: avg};
   } else {
     return {max: 0, min: 0, avg: 0};
   }
+}
+
+Meditation.prototype.cycles = function() {
+  return _.chain(
+      _.zip.apply(_, _.values(this.breaths))
+    ).map(function(cycle_arr) {
+      return sum(cycle_arr);
+    }).reject(function(val) {
+      return isNaN(val)
+    }).value();
+}
+
+function sum(arr) {
+  return _(arr).reduce(function(s, n){ return s + n; }, 0);
 }
