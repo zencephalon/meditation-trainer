@@ -6,11 +6,21 @@ function Meditation(max_breaths, $prompt, $timer_display) {
   this.$prompt = $prompt;
   this.$timer_display = $timer_display;
   this.initTimer();
-  this.setPrompt();
+  this.displayPrompt();
 }
 
-Meditation.prototype.setPrompt = function() {
+Meditation.prototype.displayPrompt = function() {
   this.$prompt.html(this.phase);
+}
+
+Meditation.prototype.breathe = function() {
+  this.setPhase();
+}
+
+Meditation.prototype.setPhase = function() {
+  this.phase = this.phase == "inhale" ? "exhale" : "inhale"
+  this.phase_start = Date.now();
+  this.displayPrompt();
 }
 
 Meditation.prototype.initTimer = function() {
