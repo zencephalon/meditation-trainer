@@ -5,14 +5,15 @@ class Meditation < ActiveRecord::Base
     html = ""
     %w(inhale exhale cycle).each do |phase|
       %w(min max avg).each do |stat|
-        html += "#{phase} #{stat}: #{format_time(self.send(phase + "_" + stat))} s<br>"
+        time = format_time(self.send(phase + "_" + stat))
+        html += "#{phase} #{stat}: #{time}<br>"
       end
     end
     html
   end
 
   def format_time(time)
-    "<span class='time'>#{time.round(1)}</span>"
+    "<span class='time'>#{time.round(1)}</span> s"
   end
 
   def table_row
