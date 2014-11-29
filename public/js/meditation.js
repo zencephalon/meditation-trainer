@@ -30,7 +30,7 @@ Meditation.prototype.checkFinish = function() {
       url: '/meditation',
       data: {meditation: this.allStats()}
     }).done(function(result) {
-
+      window.location = result;
     })
   }
 }
