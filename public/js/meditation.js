@@ -1,4 +1,4 @@
-function Meditation(max_breaths, $prompt, $timer_display) {
+function Meditation(max_breaths, $prompt, $timer_display, $stat_display) {
   this.max_breaths = max_breaths;
   this.breaths = {inhale: [], exhale: []};
   this.phase_count = 0;
@@ -6,12 +6,17 @@ function Meditation(max_breaths, $prompt, $timer_display) {
   this.phase_start = Date.now();
   this.$prompt = $prompt;
   this.$timer_display = $timer_display;
+  this.$stat_display = $stat_display;
   this.initTimer();
   this.displayPrompt();
 }
 
 Meditation.prototype.displayPrompt = function() {
   this.$prompt.html(this.phase);
+}
+
+Meditation.prototype.displayStats = function() {
+  this.$stat_display.html("Average inhale: " + this.calcAverage("inhale"));
 }
 
 Meditation.prototype.breathe = function() {
