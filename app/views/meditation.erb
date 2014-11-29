@@ -1,4 +1,7 @@
-<h2>Your results</h2>
+<h2><%= @meditation.user ? @meditation.user.name + "'s" : "Your"%> results</h2>
+<div id="bpm">
+  Average breaths per minute: <span class="time"><%= @meditation.bpm %></span>
+</div>
 <div id="stats_summary">
  <%= @meditation.stats_summary %>
 </div>

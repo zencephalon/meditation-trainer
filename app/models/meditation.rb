@@ -12,6 +12,10 @@ class Meditation < ActiveRecord::Base
     html
   end
 
+  def bpm
+    (60 / self.cycle_avg).round(1)
+  end
+
   def format_time(time)
     "<span class='time'>#{time.round(1)}</span> s"
   end
