@@ -8,4 +8,13 @@ post '/meditation' do
   end
   p med_params
   meditation = Meditation.new(med_params)
+  meditation.user = current_user
+  meditation.save
+
+  return "/meditation/#{meditation.id}"
+end
+
+get '/meditation/:id' do |id|
+  @meditation = Meditation.find(id)
+  erb :'meditation'
 end
