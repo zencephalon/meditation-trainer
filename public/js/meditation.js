@@ -15,8 +15,11 @@ Meditation.prototype.phase = function() {
   return this.phases[this.phase_count % this.phases.length];
 }
 
-Meditation.prototype.displayPrompt = function() {
-  this.$prompt.html(this.phase());
+Meditation.prototype.displayPrompt = function(prompt) {
+  if (!prompt) {
+    prompt = this.phase();
+  }
+  this.$prompt.html(prompt);
 }
 
 Meditation.prototype.displayStats = function() {
