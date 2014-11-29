@@ -70,10 +70,12 @@ Meditation.prototype.displayPrompt = function(prompt) {
 Meditation.prototype.displayStats = function() {
   var self = this;
   var html = "";
+
   this.phases.forEach(function(phase) {
     var stats = self.calcStats(self.breaths[phase]);
     html += self.formatPhaseStats(phase, stats);
   });
+
   html += this.formatPhaseStats('cycle', this.calcStats(this.cycles()));
   this.$stat_display.html(html);
 }
@@ -81,9 +83,11 @@ Meditation.prototype.displayStats = function() {
 Meditation.prototype.formatPhaseStats = function(phase, stats) {
   var html = "";
   var self = this;
+
   ['min', 'max', 'avg'].forEach(function(stat) {
       html += phase + " " + stat + ": " + self.formatSeconds(stats[stat]) + "<br>";
   });
+
   return html;
 }
 
@@ -107,7 +111,7 @@ Meditation.prototype.calcStats = function(breaths) {
 
 Meditation.prototype.cycles = function() {
   return _.chain(
-      _.zip.apply(_, _.values(this.breaths))
+      _.zip.apply(_, _(this.breaths).values())
     ).map(function(cycle_arr) {
       return sum(cycle_arr);
     }).reject(function(val) {
