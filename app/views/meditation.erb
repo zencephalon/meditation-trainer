@@ -3,5 +3,15 @@
   Average breaths per minute: <span class="time"><%= @meditation.bpm %></span>
 </div>
 <div id="stats_summary">
- <%= @meditation.stats_summary %>
+  <table>
+    <tr>
+    <th>id</th>
+    <% %w(inhale exhale cycle).each do |phase| %>
+      <% %w(min max avg).each do |stat| %>
+        <th><%= phase %> <%= stat %></th>
+      <% end %>
+    <% end %>
+    </tr>
+    <tr><%= @meditation.table_row %></tr>
+  </table>
 </div>
