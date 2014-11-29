@@ -49,7 +49,7 @@ Meditation.prototype.timeDiff = function() {
 Meditation.prototype.initTimer = function() {
   var self = this;
   this.timerInterval = setInterval(function() {
-    self.$timer_display.html(self.timeDiff().toFixed(1));
+    self.$timer_display.html(self.timeDiff().toFixed(1) + " s");
   }, 100);
 }
 

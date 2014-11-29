@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   Mousetrap.bind('space', function() {
     if (!meditation) {
-      meditation = new Meditation(MAX_BREATHS, $('#prompt'), $('#timer_display'), $('#stat_display'));
+      meditation = new Meditation(MAX_BREATHS, $('#prompt'), $('#timer'), $('#stats'));
     } else {
       meditation.breathe();
     }

@@ -54,6 +54,11 @@ a:hover {
     line-height: 1.3em;
 }
 
+#timer {
+    text-align: center;
+    color: #36AECC;
+}
+
 code {
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
     -webkit-border-radius: 1px;
