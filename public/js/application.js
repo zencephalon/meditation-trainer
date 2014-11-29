@@ -7,6 +7,5 @@ $(document).ready(function() {
     } else {
       meditation.breathe();
     }
-    console.log("Hello!");
   })
 });

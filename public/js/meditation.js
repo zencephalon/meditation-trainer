@@ -1,6 +1,7 @@
 function Meditation(max_breaths, $prompt, $timer_display) {
   this.max_breaths = max_breaths;
   this.breaths = {inhale: [], exhale: []};
+  this.phase_count = 0;
   this.phase = "inhale";
   this.phase_start = Date.now();
   this.$prompt = $prompt;
@@ -14,12 +15,21 @@ Meditation.prototype.displayPrompt = function() {
 }
 
 Meditation.prototype.breathe = function() {
+  this.breaths[this.phase].push(this.timeDiff());
   this.setPhase();
+  this.checkFinish();
+}
+
+Meditation.prototype.checkFinish = function() {
+  if (this.phase_count >= 2 * this.max_breaths) {
+    console.log("Finished!");
+  }
 }
 
 Meditation.prototype.setPhase = function() {
   this.phase = this.phase == "inhale" ? "exhale" : "inhale"
   this.phase_start = Date.now();
+  this.phase_count++;
   this.displayPrompt();
 }
 
