@@ -48,6 +48,12 @@ a:hover {
   height: 2em;
 }
 
+#prompt {
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 1.3em;
+}
+
 code {
     font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
     -webkit-border-radius: 1px;
