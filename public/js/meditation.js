@@ -73,7 +73,7 @@ Meditation.prototype.displayStats = function() {
   this.phases.forEach(function(phase) {
     var stats = self.calcStats(phase);
     ['min', 'max', 'avg'].forEach(function(stat) {
-      html += phase + " " + stat + ": " + stats[stat].toFixed(1) + "<br>";
+      html += phase + " " + stat + ": " + self.formatSeconds(stats[stat]) + "<br>";
     });
   })
   self.$stat_display.html(html);
