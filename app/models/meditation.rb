@@ -1,17 +1,6 @@
 class Meditation < ActiveRecord::Base
   belongs_to :user
 
-  def stats_summary
-    html = ""
-    %w(inhale exhale cycle).each do |phase|
-      %w(min max avg).each do |stat|
-        time = format_time(self.send(phase + "_" + stat))
-        html += "#{phase} #{stat}: #{time}<br>"
-      end
-    end
-    html
-  end
-
   def bpm
     (60 / self.cycle_avg).round(1)
   end
