@@ -1,0 +1,8 @@
+<tr>
+<th>id</th>
+<% %w(inhale exhale cycle).each do |phase| %>
+  <% %w(min max avg).each do |stat| %>
+    <th><%= phase %> <%= stat %></th>
+  <% end %>
+<% end %>
+</tr>

@@ -4,14 +4,7 @@
 
 <h2>All meditations:</h2>
 <table>
-  <tr>
-  <th>id</th>
-  <% %w(inhale exhale cycle).each do |phase| %>
-    <% %w(min max avg).each do |stat| %>
-      <th><%= phase %> <%= stat %></th>
-    <% end %>
-  <% end %>
-  </tr>
+  <%= erb :table_header %>
   <% @user.meditations.each do |meditation| %>
     <tr><%= meditation.table_row %></tr>
   <% end %>

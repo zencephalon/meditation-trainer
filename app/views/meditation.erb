@@ -1,17 +1,13 @@
-<h2><%= @meditation.user ? @meditation.user.name + "'s" : "Your"%> results</h2>
+<h2><%= @meditation.user ? "<a href='#{@meditation.user.id}'>" + @meditation.user.name + "</a>'s" : "Your"%> results</h2>
 <div id="bpm">
   Average breaths per minute: <span class="time"><%= @meditation.bpm %></span>
 </div>
 <div id="stats_summary">
   <table>
-    <tr>
-    <th>id</th>
-    <% %w(inhale exhale cycle).each do |phase| %>
-      <% %w(min max avg).each do |stat| %>
-        <th><%= phase %> <%= stat %></th>
-      <% end %>
-    <% end %>
-    </tr>
+    <%= erb :table_header %>
     <tr><%= @meditation.table_row %></tr>
   </table>
+</div>
+<div id="invite">
+  <a href="/">Think U can do better? Try a meditation!</a>
 </div>
