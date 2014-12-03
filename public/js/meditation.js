@@ -1,8 +1,13 @@
 function Meditation(max_breaths, $prompt, $timer_display, $stat_display) {
   this.max_breaths = max_breaths;
-  this.breaths = {inhale: [], exhale: []};
   this.phase_count = 0;
-  this.phases = ["inhale", "exhale"];
+  this.phases = ["inhale", "hold_inhale", "exhale", "hold_exhale"];
+  this.breaths = {};
+
+  this.phases.forEach(function(phase) {
+    this.breaths[phase] = [];
+  }.bind(this))
+
   this.phase_start = Date.now();
   this.$prompt = $prompt;
   this.$timer_display = $timer_display;
